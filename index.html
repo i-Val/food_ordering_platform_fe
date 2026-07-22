@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choply — Food, delivered fast</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg py-3 site-nav">
+  <div class="container">
+    <a class="navbar-brand brand-mark" href="#">Choply</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+        <li class="nav-item"><a class="nav-link" href="#how">How it works</a></li>
+        <li class="nav-item"><a class="nav-link" href="#restaurants">Restaurants</a></li>
+        <li class="nav-item"><a class="nav-link" href="#riders">Ride with us</a></li>
+        <li class="nav-item"><a class="btn btn-stamp mt-2 mt-lg-0" href="#order">Order now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <p class="eyebrow">ABUJA · LAGOS · PORT HARCOURT</p>
+        <h1 class="display-headline">Hungry?<br>We've got<br>a rider for that.</h1>
+        <p class="hero-copy">Order from the spots you actually crave — jollof joints, suya stands, the shawarma guy who never disappoints. Track every step from kitchen to your door.</p>
+
+        <form class="search-bar" role="search">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search 'jollof', 'suya', or a restaurant...">
+          <button type="submit" class="btn btn-stamp search-btn">Find food</button>
+        </form>
+
+        <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+          <a href="#order" class="btn btn-stamp btn-lg">Order now</a>
+          <a href="#how" class="btn btn-outline-ink btn-lg">See how it works</a>
+        </div>
+        <div class="d-flex gap-4 mt-5 stat-row">
+          <div><span class="stat-num">12 min</span><span class="stat-label">avg. delivery</span></div>
+          <div><span class="stat-num">800+</span><span class="stat-label">restaurants</span></div>
+          <div><span class="stat-num">4.8★</span><span class="stat-label">rider rating</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ticket-wrap">
+          <div class="ticket">
+            <div class="stamp">ON THE WAY</div>
+            <div class="ticket-head">
+              <span>ORDER TICKET</span>
+              <span>#0413</span>
+            </div>
+            <hr class="ticket-rule">
+            <div class="ticket-line"><span>1× Jollof Rice + Chicken</span><span>₦3,500</span></div>
+            <div class="ticket-line"><span>1× Suya Wrap</span><span>₦2,000</span></div>
+            <div class="ticket-line"><span>2× Chapman</span><span>₦2,400</span></div>
+            <hr class="ticket-rule dashed">
+            <div class="ticket-line total"><span>TOTAL</span><span>₦7,900</span></div>
+            <div class="ticket-foot">Rider Musa is 4 stops away</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="categories py-5">
+  <div class="container">
+    <h2 class="section-title">What are you craving?</h2>
+    <div class="row g-3 mt-2">
+      <div class="col-6 col-md-3">
+        <div class="cat-card"><span class="cat-emoji">🍛</span><span>Local dishes</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cat-card"><span class="cat-emoji">🍢</span><span>Suya & grills</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cat-card"><span class="cat-emoji">🌯</span><span>Shawarma & wraps</span></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cat-card"><span class="cat-emoji">🍰</span><span>Desserts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="restaurants py-5" id="restaurants">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-2">
+      <h2 class="section-title mb-0">Popular near you</h2>
+      <a href="#" class="see-all">See all →</a>
+    </div>
+    <div class="row g-4 mt-2" id="restoGrid">
+
+      <div class="col-md-4">
+        <div class="resto-card" data-search="mama ngozi's kitchen nigerian jollof swallow">
+          <div class="resto-img" style="background:#E8A93C;">🍲</div>
+          <div class="resto-body">
+            <div class="d-flex justify-content-between">
+              <h3>Mama Ngozi's Kitchen</h3>
+              <span class="badge-rating">4.9★</span>
+            </div>
+            <p class="resto-tags">Nigerian · Jollof · Swallow</p>
+            <p class="resto-meta">15–25 min · ₦500 delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="resto-card" data-search="suya spot central grills suya kilishi">
+          <div class="resto-img" style="background:#E8452C;">🥙</div>
+          <div class="resto-body">
+            <div class="d-flex justify-content-between">
+              <h3>Suya Spot Central</h3>
+              <span class="badge-rating">4.7★</span>
+            </div>
+            <p class="resto-tags">Grills · Suya · Kilishi</p>
+            <p class="resto-meta">10–20 min · ₦400 delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="resto-card" data-search="chapman & co. drinks smoothies snacks">
+          <div class="resto-img" style="background:#4C7A54;">🥤</div>
+          <div class="resto-body">
+            <div class="d-flex justify-content-between">
+              <h3>Chapman & Co.</h3>
+              <span class="badge-rating">4.8★</span>
+            </div>
+            <p class="resto-tags">Drinks · Smoothies · Snacks</p>
+            <p class="resto-meta">8–15 min · ₦300 delivery</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="how py-5" id="how">
+  <div class="container">
+    <h2 class="section-title">How it works</h2>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4">
+        <div class="step-card">
+          <span class="step-num">01</span>
+          <h3>Order</h3>
+          <p>Pick your spot, build your cart, checkout in under a minute.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <span class="step-num">02</span>
+          <h3>Track</h3>
+          <p>Watch your rider move on the map, live, from kitchen to your gate.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <span class="step-num">03</span>
+          <h3>Enjoy</h3>
+          <p>Food arrives hot. Rate your rider. Repeat tomorrow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band py-5" id="order">
+  <div class="container text-center">
+    <h2 class="display-headline cta-headline">Your next meal is<br>one tap away.</h2>
+    <a href="#" class="btn btn-stamp btn-lg mt-4">Get the app</a>
+  </div>
+</section>
+
+<footer class="site-footer py-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <span class="brand-mark small">Choply</span>
+    <p class="mb-0 small text-muted">Built as a SIWES front-end practice project · Not affiliated with any delivery brand</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const restoGrid = document.getElementById('restoGrid');
+  const cards = restoGrid.querySelectorAll('.resto-card');
+
+  searchInput.addEventListener('input', function () {
+    const query = searchInput.value.toLowerCase().trim();
+
+    cards.forEach(function (card) {
+      const searchText = card.getAttribute('data-search');
+      const cardCol = card.closest('.col-md-4');
+
+      if (searchText.includes(query)) {
+        cardCol.style.display = '';
+      } else {
+        cardCol.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
