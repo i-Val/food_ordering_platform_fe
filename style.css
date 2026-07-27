@@ -115,6 +115,7 @@ body{
   display:flex;
   justify-content:center;
   perspective:800px;
+  position:relative;
 }
 .ticket{
   background:#fffdf7;
@@ -226,11 +227,10 @@ body{
 .resto-card:hover{ transform:translateY(-4px); }
 .resto-img{
   height:140px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:3rem;
+  width:100%;
+  object-fit:cover;
   border-bottom:2px solid var(--ink);
+  display:block;
 }
 .resto-body{ padding:1.2rem; }
 .resto-body h3{
@@ -291,4 +291,164 @@ body{
 @media (max-width: 767px){
   .display-headline{ font-size:2.3rem; }
   .cta-headline{ font-size:1.9rem; }
+}
+.auth-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(232,169,60,0.25), transparent 40%),
+    var(--cream);
+  padding:2rem 1rem;
+}
+.auth-card{
+  background:#fffdf7;
+  border:2px solid var(--ink);
+  border-radius:10px;
+  padding:2.5rem;
+  width:100%;
+  max-width:420px;
+  box-shadow:8px 8px 0 rgba(43,38,34,0.15);
+}
+.auth-brand{
+  display:block;
+  text-align:center;
+  margin-bottom:1.2rem;
+}
+.auth-eyebrow{
+  text-align:center;
+  margin-bottom:0.3rem;
+}
+.auth-heading{
+  font-family:'Anton', sans-serif;
+  text-align:center;
+  font-size:2rem;
+  margin-bottom:1.8rem;
+}
+.auth-form{
+  display:flex;
+  flex-direction:column;
+}
+.auth-label{
+  font-size:0.8rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  color:#6b6259;
+  margin-bottom:0.4rem;
+  margin-top:1rem;
+}
+.auth-input{
+  border:2px solid var(--ink);
+  border-radius:8px;
+  padding:0.7rem 1rem;
+  font-family:'Work Sans', sans-serif;
+  font-size:0.95rem;
+  background:transparent;
+  outline:none;
+}
+.auth-input:focus{
+  border-color:var(--chili);
+}
+.auth-submit{
+  width:100%;
+  margin-top:1.8rem;
+  text-align:center;
+}
+.auth-switch{
+  text-align:center;
+  margin-top:1.5rem;
+  font-size:0.9rem;
+  color:#6b6259;
+}
+.auth-switch a{
+  color:var(--chili);
+  font-weight:700;
+  text-decoration:none;
+}
+.profile-header{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  flex-wrap:wrap;
+}
+.profile-avatar{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--ink);
+  flex-shrink:0;
+  display:block;
+}
+.profile-name{
+  font-size:1.6rem;
+  margin-bottom:0.1rem;
+}
+.profile-email{
+  color:#6b6259;
+  margin-bottom:0;
+}
+.profile-logout{
+  margin-left:auto;
+}
+
+.profile-stat{
+  background:#fffdf7;
+  border:2px solid var(--ink);
+  border-radius:8px;
+  padding:1rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.2rem;
+}
+.profile-stat .stat-num{ color:var(--chili); }
+
+.order-history{
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+}
+.order-row{
+  background:#fffdf7;
+  border:2px solid var(--ink);
+  border-radius:8px;
+  padding:1rem 1.4rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+.order-info h3{
+  font-size:1rem;
+  margin-bottom:0.1rem;
+}
+.order-info p{
+  font-size:0.85rem;
+  color:#6b6259;
+  margin-bottom:0;
+}
+.order-meta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:0.2rem;
+}
+.order-date{
+  font-size:0.75rem;
+  color:#6b6259;
+}
+.hero-food-img{
+  position:absolute;
+  width:70%;
+  max-width:280px;
+  border-radius:12px;
+  border:2px solid var(--ink);
+  box-shadow:8px 8px 0 rgba(43,38,34,0.15);
+  top:-2rem;
+  left:-2rem;
+  z-index:0;
+  transform:rotate(-6deg);
 }
