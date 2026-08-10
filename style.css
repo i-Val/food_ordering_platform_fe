@@ -1,16 +1,16 @@
 :root{
-  --cream:#FFF8ED;
-  --ink:#2B2622;
-  --chili:#E8452C;
-  --herb:#4C7A54;
-  --mustard:#E8A93C;
-  --kraft:#A9734A;
+  --cream:#b24f25;
+  --ink:#17120e;
+  --chili:#c9695c;
+  --herb:#051709;
+  --mustard:#412b05;
+  --kraft:#8c4610;
 }
 
 *{box-sizing:border-box;}
 
 body{
-  background:var(--cream);
+  background:var(--cream)7;
   color:var(--ink);
   font-family:'Work Sans', sans-serif;
   overflow-x:hidden;
