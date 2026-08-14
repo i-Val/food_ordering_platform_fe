@@ -1,0 +1,186 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Ofure Itulah",
+      "email": "ofure@example.com",
+      "password": "$2a$10$Z3dY4v3E8.HhJ.gG3z9Fxe2v9n0H45K0u6Yv8Zg9rP9pXoF8g9H6S",
+      "rating": 4.9,
+      "savedSpotsCount": 3
+    },
+    {
+      "id": 2,
+      "fullName": "Test User",
+      "email": "testuser_1786531193428@example.com",
+      "password": "$2a$10$/Eq9ot3roxZjhsx8tswqk.Au9Ds9K/bv3h3Wd4C9ljar6Seq4gpbu",
+      "rating": 5,
+      "savedSpotsCount": 0
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Mama Ngozi's Kitchen",
+      "rating": 4.9,
+      "tags": [
+        "Nigerian",
+        "Jollof",
+        "Swallow"
+      ],
+      "deliveryTime": "15–25 min",
+      "deliveryFee": 500,
+      "image": "images/resto-jollof.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Suya Spot Central",
+      "rating": 4.7,
+      "tags": [
+        "Grills",
+        "Suya",
+        "Kilishi"
+      ],
+      "deliveryTime": "10–20 min",
+      "deliveryFee": 400,
+      "image": "images/resto-suya.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Chapman & Co.",
+      "rating": 4.8,
+      "tags": [
+        "Drinks",
+        "Smoothies",
+        "Snacks"
+      ],
+      "deliveryTime": "8–15 min",
+      "deliveryFee": 300,
+      "image": "images/resto-chapman.jpg"
+    }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "restaurantId": 1,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "name": "Jollof Rice + Chicken",
+      "price": 3500,
+      "image": "images/resto-jollof.jpg"
+    },
+    {
+      "id": 2,
+      "restaurantId": 1,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "name": "Fried Rice + Plantain",
+      "price": 3200,
+      "image": "images/resto-jollof.jpg"
+    },
+    {
+      "id": 3,
+      "restaurantId": 2,
+      "restaurantName": "Suya Spot Central",
+      "name": "Suya Wrap",
+      "price": 2000,
+      "image": "images/resto-suya.jpg"
+    },
+    {
+      "id": 4,
+      "restaurantId": 2,
+      "restaurantName": "Suya Spot Central",
+      "name": "Kilishi Platter",
+      "price": 4500,
+      "image": "images/resto-suya.jpg"
+    },
+    {
+      "id": 5,
+      "restaurantId": 3,
+      "restaurantName": "Chapman & Co.",
+      "name": "Chapman",
+      "price": 1200,
+      "image": "images/resto-chapman.jpg"
+    },
+    {
+      "id": 6,
+      "restaurantId": 3,
+      "restaurantName": "Chapman & Co.",
+      "name": "Mixed Fruit Smoothie",
+      "price": 1800,
+      "image": "images/resto-chapman.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Jollof Rice + Chicken",
+          "price": 3500,
+          "quantity": 1
+        }
+      ],
+      "total": 3500,
+      "date": "2026-07-20T12:00:00Z",
+      "deliveryAddress": "12 Aso Drive, Abuja",
+      "fullName": "Ofure Itulah",
+      "phone": "08012345678"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "restaurantName": "Suya Spot Central",
+      "items": [
+        {
+          "name": "Suya Wrap",
+          "price": 2000,
+          "quantity": 1
+        }
+      ],
+      "total": 2000,
+      "date": "2026-07-18T18:30:00Z",
+      "deliveryAddress": "12 Aso Drive, Abuja",
+      "fullName": "Ofure Itulah",
+      "phone": "08012345678"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "restaurantName": "Chapman & Co.",
+      "items": [
+        {
+          "name": "Chapman",
+          "price": 1200,
+          "quantity": 2
+        }
+      ],
+      "total": 2400,
+      "date": "2026-07-15T15:45:00Z",
+      "deliveryAddress": "12 Aso Drive, Abuja",
+      "fullName": "Ofure Itulah",
+      "phone": "08012345678"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Jollof Rice + Chicken",
+          "price": 3500,
+          "quantity": 2
+        },
+        {
+          "name": "Chapman",
+          "price": 1200,
+          "quantity": 1
+        }
+      ],
+      "total": 8200,
+      "date": "2026-08-12T10:39:54.148Z",
+      "deliveryAddress": "123 Test St, Test City",
+      "fullName": "Test User",
+      "phone": "08099998888"
+    }
+  ]
+}
