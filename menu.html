@@ -1,189 +1,807 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu — Choply</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Menu — Choply</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg py-3 site-nav">
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg site-nav py-3">
   <div class="container">
-    <a class="navbar-brand brand-mark" href="index.html">Choply</a>
-    <div class="ms-auto d-flex align-items-center gap-3">
-      <a href="cart.html" class="nav-link">Cart (<span id="cartCount">0</span>)</a>
-      <a href="index.html" class="nav-link">Back to home</a>
+
+    <a href="index.html" class="navbar-brand brand-mark">
+      Choply
+    </a>
+
+    <div class="d-flex align-items-center gap-3">
+
+      <a href="index.html" class="nav-link">
+        Home
+      </a>
+
+      <a href="cart.html" class="cart-link">
+        🛒 Cart
+        <span id="cartCount" class="cart-badge">0</span>
+      </a>
+
     </div>
+
   </div>
 </nav>
 
+
+<!-- ================= HERO ================= -->
+<section class="menu-hero">
+
+  <div class="container text-center">
+
+    <span class="hero-label">
+      CHOPLY MENU
+    </span>
+
+    <h1 class="menu-title">
+      Eat Good.<br>
+      <span>Feel Good.</span>
+    </h1>
+
+    <p class="menu-subtitle">
+      Delicious meals from your favourite restaurants,
+      delivered straight to you.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MENU ================= -->
 <section class="menu-section py-5">
+
   <div class="container">
-    <h1 class="section-title">Full Menu</h1>
-    <p class="menu-subtitle">Everything, from every restaurant, in one place.</p>
-    <section class="menu-section py-5">
-  <div class="container">
-    <h1 class="section-title">Full Menu</h1>
-    <p class="menu-subtitle">Everything, from every restaurant, in one place.</p>
 
-    <h2 class="menu-resto-heading mt-5">Mama Ngozi's Kitchen</h2>
-    <div class="row g-3 mt-2">
+    <!-- Search -->
+    <div class="search-box mb-5">
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-jollof.jpg" alt="Jollof rice and chicken" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Jollof Rice + Chicken</h3>
-            <p class="menu-item-price mono">₦3,500</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Jollof Rice + Chicken"
-              data-price="3500"
-              data-restaurant="Mama Ngozi's Kitchen">
-              Add to cart
-            </button>
-          </div>
-        </div>
-      </div>
+      <div class="input-group">
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-jollof.jpg" alt="Fried rice and plantain" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Fried Rice + Plantain</h3>
-            <p class="menu-item-price mono">₦3,200</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Fried Rice + Plantain"
-              data-price="3200"
-              data-restaurant="Mama Ngozi's Kitchen">
-              Add to cart
-            </button>
-          </div>
-        </div>
+        <span class="input-group-text">
+          🔍
+        </span>
+
+        <input
+          type="text"
+          id="searchInput"
+          class="form-control"
+          placeholder="Search for food..."
+        >
+
       </div>
 
     </div>
 
-    <h2 class="menu-resto-heading mt-5">Suya Spot Central</h2>
-    <div class="row g-3 mt-2">
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-suya.jpg" alt="Suya wrap" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Suya Wrap</h3>
-            <p class="menu-item-price mono">₦2,000</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Suya Wrap"
-              data-price="2000"
-              data-restaurant="Suya Spot Central">
-              Add to cart
-            </button>
-          </div>
+    <!-- Categories -->
+    <div class="category-buttons text-center mb-5">
+
+      <button
+        class="category-btn active"
+        data-category="all">
+        All
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="rice">
+        🍚 Rice
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="suya">
+        🥩 Suya
+      </button>
+
+      <button
+        class="category-btn"
+        data-category="drinks">
+        🥤 Drinks
+      </button>
+
+    </div>
+
+
+    <!-- ================= MAMA NGOZI ================= -->
+    <div class="restaurant-section">
+
+      <div class="restaurant-header">
+
+        <div>
+          <span class="restaurant-tag">
+            LOCAL FAVOURITE
+          </span>
+
+          <h2>
+            Mama Ngozi's Kitchen
+          </h2>
+
+          <p>
+            Authentic Nigerian meals made fresh every day.
+          </p>
         </div>
+
       </div>
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-suya.jpg" alt="Kilishi platter" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Kilishi Platter</h3>
-            <p class="menu-item-price mono">₦4,500</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Kilishi Platter"
-              data-price="4500"
-              data-restaurant="Suya Spot Central">
-              Add to cart
-            </button>
+
+      <div class="row g-4">
+
+        <!-- Jollof -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="rice"
+          data-name="jollof rice chicken"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-jollof.jpg"
+                alt="Jollof rice with chicken"
+                class="food-image"
+              >
+
+              <span class="food-badge">
+                Popular
+              </span>
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Jollof Rice + Chicken
+              </h3>
+
+              <p>
+                Smoky Nigerian jollof rice served with
+                juicy grilled chicken.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦3,500
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Jollof Rice + Chicken"
+                  data-price="3500"
+                  data-restaurant="Mama Ngozi's Kitchen"
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
           </div>
+
         </div>
+
+
+        <!-- Fried Rice -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="rice"
+          data-name="fried rice plantain"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-jollof.jpg"
+                alt="Fried rice and plantain"
+                class="food-image"
+              >
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Fried Rice + Plantain
+              </h3>
+
+              <p>
+                Flavourful fried rice served with sweet
+                golden fried plantain.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦3,200
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Fried Rice + Plantain"
+                  data-price="3200"
+                  data-restaurant="Mama Ngozi's Kitchen"
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
     </div>
 
-    <h2 class="menu-resto-heading mt-5">Chapman & Co.</h2>
-    <div class="row g-3 mt-2">
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-chapman.jpg" alt="Chapman drink" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Chapman</h3>
-            <p class="menu-item-price mono">₦1,200</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Chapman"
-              data-price="1200"
-              data-restaurant="Chapman & Co.">
-              Add to cart
-            </button>
-          </div>
+
+    <!-- ================= SUYA SPOT ================= -->
+    <div class="restaurant-section mt-5">
+
+      <div class="restaurant-header">
+
+        <div>
+          <span class="restaurant-tag">
+            GRILL & SUYA
+          </span>
+
+          <h2>
+            Suya Spot Central
+          </h2>
+
+          <p>
+            Spicy, smoky and freshly grilled.
+          </p>
         </div>
+
       </div>
 
-      <div class="col-md-4">
-        <div class="menu-item">
-          <img src="images/resto-chapman.jpg" alt="Smoothie" class="menu-item-img">
-          <div class="menu-item-body">
-            <h3>Mixed Fruit Smoothie</h3>
-            <p class="menu-item-price mono">₦1,800</p>
-            <button class="btn btn-stamp add-to-cart-btn"
-              data-name="Mixed Fruit Smoothie"
-              data-price="1800"
-              data-restaurant="Chapman & Co.">
-              Add to cart
-            </button>
+
+      <div class="row g-4">
+
+        <!-- Suya Wrap -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="suya"
+          data-name="suya wrap"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-suya.jpg"
+                alt="Suya wrap"
+                class="food-image"
+              >
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Suya Wrap
+              </h3>
+
+              <p>
+                Tender spicy suya wrapped with fresh
+                vegetables and sauce.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦2,000
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Suya Wrap"
+                  data-price="2000"
+                  data-restaurant="Suya Spot Central"
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
           </div>
+
         </div>
+
+
+        <!-- Kilishi -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="suya"
+          data-name="kilishi platter"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-suya.jpg"
+                alt="Kilishi platter"
+                class="food-image"
+              >
+
+              <span class="food-badge">
+                Hot
+              </span>
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Kilishi Platter
+              </h3>
+
+              <p>
+                Delicious spicy Nigerian dried beef
+                served as a generous platter.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦4,500
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Kilishi Platter"
+                  data-price="4500"
+                  data-restaurant="Suya Spot Central"
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
+    </div>
+
+
+
+    <!-- ================= DRINKS ================= -->
+    <div class="restaurant-section mt-5">
+
+      <div class="restaurant-header">
+
+        <div>
+          <span class="restaurant-tag">
+            REFRESHMENTS
+          </span>
+
+          <h2>
+            Chapman & Co.
+          </h2>
+
+          <p>
+            Cool drinks to complete your meal.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="row g-4">
+
+        <!-- Chapman -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="drinks"
+          data-name="chapman"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-chapman.jpg"
+                alt="Chapman drink"
+                class="food-image"
+              >
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Chapman
+              </h3>
+
+              <p>
+                A refreshing Nigerian cocktail-style
+                fruit drink served chilled.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦1,200
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Chapman"
+                  data-price="1200"
+                  data-restaurant="Chapman & Co."
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Smoothie -->
+        <div
+          class="col-md-6 col-lg-4 food-card-wrapper"
+          data-category="drinks"
+          data-name="mixed fruit smoothie"
+        >
+
+          <div class="food-card">
+
+            <div class="food-image-wrapper">
+
+              <img
+                src="images/resto-chapman.jpg"
+                alt="Mixed fruit smoothie"
+                class="food-image"
+              >
+
+            </div>
+
+
+            <div class="food-content">
+
+              <h3>
+                Mixed Fruit Smoothie
+              </h3>
+
+              <p>
+                A creamy blend of fresh mixed fruits.
+              </p>
+
+              <div class="food-bottom">
+
+                <span class="food-price">
+                  ₦1,800
+                </span>
+
+                <button
+                  class="add-btn add-to-cart-btn"
+                  data-name="Mixed Fruit Smoothie"
+                  data-price="1800"
+                  data-restaurant="Chapman & Co."
+                >
+                  + Add
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- No results -->
+    <div id="noResults" class="text-center py-5 d-none">
+
+      <h3>
+        😕 No food found
+      </h3>
+
+      <p>
+        Try searching for something else.
+      </p>
 
     </div>
 
   </div>
+
 </section>
 
+
+<!-- ================= TOAST ================= -->
+<div
+  id="cartToast"
+  class="cart-toast"
+>
+  <span>✓</span>
+  <div>
+    <strong>Added to cart!</strong>
+    <small id="toastItem"></small>
   </div>
-</section>
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
 <script>
+
+  /* ================= CART ================= */
+
   function getCart() {
-    const cartData = localStorage.getItem('choplyCart');
-    return cartData ? JSON.parse(cartData) : [];
+
+    const cartData =
+      localStorage.getItem("choplyCart");
+
+    return cartData
+      ? JSON.parse(cartData)
+      : [];
+
   }
+
 
   function saveCart(cart) {
-    localStorage.setItem('choplyCart', JSON.stringify(cart));
+
+    localStorage.setItem(
+      "choplyCart",
+      JSON.stringify(cart)
+    );
+
   }
+
 
   function updateCartCount() {
+
     const cart = getCart();
-    document.getElementById('cartCount').textContent = cart.length;
+
+    document.getElementById("cartCount")
+      .textContent = cart.length;
+
   }
 
-  const addButtons = document.querySelectorAll('.add-to-cart-btn');
 
-  addButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      const item = {
-        name: button.getAttribute('data-name'),
-        price: Number(button.getAttribute('data-price')),
-        restaurant: button.getAttribute('data-restaurant')
-      };
+  /* ================= ADD TO CART ================= */
 
-      const cart = getCart();
-      cart.push(item);
-      saveCart(cart);
-      updateCartCount();
+  document
+    .querySelectorAll(".add-to-cart-btn")
+    .forEach(button => {
 
-      button.textContent = 'Added ✓';
-      setTimeout(function () {
-        button.textContent = 'Add to cart';
-      }, 1000);
+      button.addEventListener("click", () => {
+
+        const item = {
+
+          name:
+            button.dataset.name,
+
+          price:
+            Number(button.dataset.price),
+
+          restaurant:
+            button.dataset.restaurant
+
+        };
+
+
+        const cart = getCart();
+
+        cart.push(item);
+
+        saveCart(cart);
+
+        updateCartCount();
+
+
+        /* Button animation */
+
+        const originalText =
+          button.textContent;
+
+        button.textContent =
+          "✓ Added";
+
+        button.classList.add("added");
+
+
+        setTimeout(() => {
+
+          button.textContent =
+            originalText;
+
+          button.classList.remove("added");
+
+        }, 1200);
+
+
+        /* Toast */
+
+        document.getElementById("toastItem")
+          .textContent =
+          `${item.name} • ₦${item.price.toLocaleString()}`;
+
+        const toast =
+          document.getElementById("cartToast");
+
+        toast.classList.add("show");
+
+
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 2000);
+
+      });
+
     });
+
+
+
+  /* ================= CATEGORY FILTER ================= */
+
+  const categoryButtons =
+    document.querySelectorAll(".category-btn");
+
+  const foodCards =
+    document.querySelectorAll(".food-card-wrapper");
+
+
+  categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      categoryButtons.forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      button.classList.add("active");
+
+
+      const category =
+        button.dataset.category;
+
+
+      foodCards.forEach(card => {
+
+        if (
+          category === "all" ||
+          card.dataset.category === category
+        ) {
+
+          card.style.display = "";
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+    });
+
   });
 
+
+
+  /* ================= SEARCH ================= */
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+  searchInput.addEventListener(
+    "input",
+    () => {
+
+      const search =
+        searchInput.value
+          .toLowerCase()
+          .trim();
+
+
+      let visibleCards = 0;
+
+
+      foodCards.forEach(card => {
+
+        const name =
+          card.dataset.name
+            .toLowerCase();
+
+
+        if (name.includes(search)) {
+
+          card.style.display = "";
+
+          visibleCards++;
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+
+      document
+        .getElementById("noResults")
+        .classList.toggle(
+          "d-none",
+          visibleCards !== 0
+        );
+
+    }
+  );
+
+
+
+  /* ================= INITIALIZE ================= */
+
   updateCartCount();
+
 </script>
+
 </body>
 </html>
