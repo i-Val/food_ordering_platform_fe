@@ -15,6 +15,22 @@
       "password": "$2a$10$/Eq9ot3roxZjhsx8tswqk.Au9Ds9K/bv3h3Wd4C9ljar6Seq4gpbu",
       "rating": 5,
       "savedSpotsCount": 0
+    },
+    {
+      "id": 3,
+      "fullName": "ofure itulah",
+      "email": "test@test.com",
+      "password": "$2a$10$ZFvfwJ0pvPFTCIfYqFMo6exctdA5eF.Z6gKPSZnC5a3l5f7sqEqKe",
+      "rating": 5,
+      "savedSpotsCount": 0
+    },
+    {
+      "id": 4,
+      "fullName": "ofure itulah",
+      "email": "ofurelaptop99@gmail.com",
+      "password": "$2a$10$X8AWLHjzyZM13XaqJvSNGOW2mIXeghYzJv0Hwd5j/KvQ7y8KFf43W",
+      "rating": 5,
+      "savedSpotsCount": 0
     }
   ],
   "restaurants": [
@@ -106,6 +122,70 @@
       "name": "Mixed Fruit Smoothie",
       "price": 1800,
       "image": "images/resto-chapman.jpg"
+    },
+    {
+      "id": 8,
+      "restaurantId": 1,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "name": "Egusi Soup + Pounded Yam",
+      "price": 4200,
+      "image": "images/food-egusi.jpg"
+    },
+    {
+      "id": 9,
+      "restaurantId": 1,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "name": "Moi Moi + Pap",
+      "price": 2500,
+      "image": "images/food-salad.jpg"
+    },
+    {
+      "id": 10,
+      "restaurantId": 2,
+      "restaurantName": "Suya Spot Central",
+      "name": "Beef Suya Sticks",
+      "price": 2800,
+      "image": "images/food-burger.jpg"
+    },
+    {
+      "id": 11,
+      "restaurantId": 2,
+      "restaurantName": "Suya Spot Central",
+      "name": "Grilled Chicken Wings",
+      "price": 3500,
+      "image": "images/food-pizza.jpg"
+    },
+    {
+      "id": 12,
+      "restaurantId": 3,
+      "restaurantName": "Chapman & Co.",
+      "name": "Chilled Zobo",
+      "price": 1000,
+      "image": "images/food-drink.jpg"
+    },
+    {
+      "id": 13,
+      "restaurantId": 3,
+      "restaurantName": "Chapman & Co.",
+      "name": "Mango Smoothie",
+      "price": 2000,
+      "image": "images/food-bowl.jpg"
+    },
+    {
+      "id": 7,
+      "restaurantId": null,
+      "restaurantName": "big ideas",
+      "name": "bread",
+      "price": 40000,
+      "image": "images/hero-food.jpg"
+    },
+    {
+      "id": 14,
+      "restaurantId": null,
+      "restaurantName": "big ideas",
+      "name": "yam ",
+      "price": 10000,
+      "image": "images/hero-food.jpg"
     }
   ],
   "orders": [
@@ -181,6 +261,237 @@
       "deliveryAddress": "123 Test St, Test City",
       "fullName": "Test User",
       "phone": "08099998888"
+    },
+    {
+      "id": 5,
+      "userId": 3,
+      "restaurantName": "Chapman & Co.",
+      "items": [
+        {
+          "name": "Mixed Fruit Smoothie",
+          "price": 1800,
+          "restaurant": "Chapman & Co.",
+          "customization": "Regular",
+          "quantity": 1
+        }
+      ],
+      "total": 1800,
+      "date": "2026-09-03T14:00:07.657Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Cash on delivery",
+      "status": "Pending"
+    },
+    {
+      "id": 6,
+      "userId": 3,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Jollof Rice + Chicken",
+          "price": 3500,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 7
+        },
+        {
+          "name": "Fried Rice + Plantain",
+          "price": 3200,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 6
+        }
+      ],
+      "total": 43700,
+      "date": "2026-09-03T14:01:09.318Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Card",
+      "status": "Accepted"
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Fried Rice + Plantain",
+          "price": 3200,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 1
+        },
+        {
+          "name": "Jollof Rice + Chicken",
+          "price": 3500,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 4
+        }
+      ],
+      "total": 17200,
+      "date": "2026-09-03T14:08:15.283Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "sam",
+      "phone": "08123456789",
+      "paymentMethod": "Card",
+      "status": "Accepted"
+    },
+    {
+      "id": 8,
+      "userId": 3,
+      "restaurantName": "big ideas",
+      "items": [
+        {
+          "name": "bread",
+          "price": 40000,
+          "restaurant": "big ideas",
+          "customization": "Standard",
+          "quantity": 1
+        }
+      ],
+      "total": 40000,
+      "date": "2026-09-03T14:28:59.940Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Bank transfer",
+      "status": "Accepted"
+    },
+    {
+      "id": 9,
+      "userId": 4,
+      "restaurantName": "big ideas",
+      "items": [
+        {
+          "name": "bread",
+          "price": 40000,
+          "restaurant": "big ideas",
+          "customization": "Standard",
+          "quantity": 10
+        }
+      ],
+      "total": 400000,
+      "date": "2026-09-03T14:43:36.603Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Bank transfer",
+      "status": "Accepted"
+    },
+    {
+      "id": 10,
+      "userId": 4,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Egusi Soup + Pounded Yam",
+          "price": 4200,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 20
+        }
+      ],
+      "total": 84000,
+      "date": "2026-09-03T15:24:17.054Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Card",
+      "status": "Accepted"
+    },
+    {
+      "id": 11,
+      "userId": 4,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Fried Rice + Plantain",
+          "price": 3700,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Extra plantain",
+          "quantity": 1
+        },
+        {
+          "name": "Mixed Fruit Smoothie",
+          "price": 2300,
+          "restaurant": "Chapman & Co.",
+          "customization": "Large",
+          "quantity": 1
+        },
+        {
+          "name": "Mango Smoothie",
+          "price": 2000,
+          "restaurant": "Chapman & Co.",
+          "customization": "Standard",
+          "quantity": 1
+        }
+      ],
+      "total": 8000,
+      "date": "2026-09-03T19:38:20.940Z",
+      "deliveryAddress": "Gwarimpa housing estate Rd 69 house no 10",
+      "fullName": "Shadrack Itulah",
+      "phone": "08123456789",
+      "paymentMethod": "Card",
+      "status": "Accepted"
+    },
+    {
+      "id": 12,
+      "userId": 3,
+      "restaurantName": "Mama Ngozi's Kitchen",
+      "items": [
+        {
+          "name": "Egusi Soup + Pounded Yam",
+          "price": 4200,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 20
+        },
+        {
+          "name": "Fried Rice + Plantain",
+          "price": 3200,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 20
+        },
+        {
+          "name": "Jollof Rice + Chicken",
+          "price": 3500,
+          "restaurant": "Mama Ngozi's Kitchen",
+          "customization": "Standard",
+          "quantity": 20
+        },
+        {
+          "name": "bread",
+          "price": 40000,
+          "restaurant": "big ideas",
+          "customization": "Standard",
+          "quantity": 20
+        },
+        {
+          "name": "Mixed Fruit Smoothie",
+          "price": 1800,
+          "restaurant": "Chapman & Co.",
+          "customization": "Regular",
+          "quantity": 5
+        },
+        {
+          "name": "Mango Smoothie",
+          "price": 2000,
+          "restaurant": "Chapman & Co.",
+          "customization": "Standard",
+          "quantity": 20
+        }
+      ],
+      "total": 1067000,
+      "date": "2026-09-09T11:09:34.653Z",
+      "deliveryAddress": "test address",
+      "fullName": "test",
+      "phone": "08123456789",
+      "paymentMethod": "Card",
+      "status": "Pending"
     }
   ]
 }

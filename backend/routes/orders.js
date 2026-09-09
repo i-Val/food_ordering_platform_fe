@@ -1,6 +1,6 @@
-import express from 'express';
-import { readDb, writeDb } from '../data/db.js';
-import { authenticateToken } from '../middleware/auth.js';
+import express from "express";
+import { readDb, writeDb } from "../data/db.js";
+import { authenticateToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -86,26 +86,44 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized (Token missing or invalid)
  */
-router.post('/orders', authenticateToken, (req, res) => {
+router.post("/orders", authenticateToken, (req, res) => {
   try {
-    const { restaurantName, items, fullName, address, phone } = req.body;
+    const { restaurantName, items, fullName, address, phone, paymentMethod } =
+      req.body;
     const userId = req.user.id;
 
-    if (!restaurantName || !items || !Array.isArray(items) || items.length === 0 || !fullName || !address || !phone) {
-      return res.status(400).json({ error: 'Order details are incomplete. Make sure you specify restaurantName, items, fullName, address, and phone.' });
+    if (
+      !restaurantName ||
+      !items ||
+      !Array.isArray(items) ||
+      items.length === 0 ||
+      !fullName ||
+      !address ||
+      !phone ||
+      !paymentMethod
+    ) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "Order details are incomplete. Make sure you specify restaurantName, items, fullName, address, and phone.",
+        });
     }
 
     let total = 0;
     for (const item of items) {
       if (!item.name || !item.price || !item.quantity) {
-        return res.status(400).json({ error: 'Each item must have a name, price, and quantity.' });
+        return res
+          .status(400)
+          .json({ error: "Each item must have a name, price, and quantity." });
       }
       total += item.price * item.quantity;
     }
 
     const db = readDb();
     const newOrder = {
-      id: db.orders.length > 0 ? Math.max(...db.orders.map(o => o.id)) + 1 : 1,
+      id:
+        db.orders.length > 0 ? Math.max(...db.orders.map((o) => o.id)) + 1 : 1,
       userId,
       restaurantName,
       items,
@@ -113,7 +131,9 @@ router.post('/orders', authenticateToken, (req, res) => {
       date: new Date().toISOString(),
       deliveryAddress: address,
       fullName,
-      phone
+      phone,
+      paymentMethod,
+      status: "Pending",
     };
 
     db.orders.push(newOrder);
@@ -121,8 +141,8 @@ router.post('/orders', authenticateToken, (req, res) => {
 
     res.status(201).json(newOrder);
   } catch (error) {
-    console.error('Create order error:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Create order error:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 
@@ -159,19 +179,19 @@ router.post('/orders', authenticateToken, (req, res) => {
  *       401:
  *         description: Unauthorized
  */
-router.get('/orders', authenticateToken, (req, res) => {
+router.get("/orders", authenticateToken, (req, res) => {
   try {
     const userId = req.user.id;
     const db = readDb();
-    const userOrders = db.orders.filter(o => o.userId === userId);
+    const userOrders = db.orders.filter((o) => o.userId === userId);
 
     // Sort by date descending
     userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     res.json(userOrders);
   } catch (error) {
-    console.error('Fetch orders error:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Fetch orders error:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

@@ -1,107 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile — Choply</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile — Choply</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg py-3 site-nav">
+      <div class="container">
+        <section class="profile-section py-5">
+          <div class="container">
+            <div class="profile-header">
+              <img
+                src="images/avatar.jpg"
+                alt="Ofure's profile photo"
+                class="profile-avatar"
+              />
+              <div>
+                <h1 class="profile-name">Ofure Itulah</h1>
+                <p class="profile-email">ofure@example.com</p>
+              </div>
+              <a href="login.html" class="btn btn-outline-ink profile-logout"
+                >Log out</a
+              >
+            </div>
 
-<nav class="navbar navbar-expand-lg py-3 site-nav">
-  <div class="container"> <section class="profile-section py-5">
-  <div class="container">
+            <div class="row g-3 mt-4">
+              <div class="col-6 col-md-3">
+                <div class="profile-stat">
+                  <span class="stat-num">14</span>
+                  <span class="stat-label">Orders placed</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="profile-stat">
+                  <span class="stat-num">₦250,300.90</span>
+                  <span class="stat-label">Total spent</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="profile-stat">
+                  <span class="stat-num">3</span>
+                  <span class="stat-label">Saved spots</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="profile-stat">
+                  <span class="stat-num">4.9★</span>
+                  <span class="stat-label">Your rating</span>
+                </div>
+              </div>
+            </div>
 
-    <div class="profile-header">
-<img src="images/avatar.jpg" alt="Ofure's profile photo" class="profile-avatar">      <div>
-        <h1 class="profile-name">Ofure Itulah</h1>
-        <p class="profile-email">ofure@example.com</p>
-      </div>
-      <a href="login.html" class="btn btn-outline-ink profile-logout">Log out</a>
-    </div>
+            <h2 class="section-title mt-5">Recent orders</h2>
+            <div class="order-history mt-3">
+              <div class="order-row">
+                <div class="order-info">
+                  <h3>Mama Ngozi's Kitchen</h3>
+                  <p>Jollof Rice + Chicken · 2 items</p>
+                </div>
+                <div class="order-meta">
+                  <span class="mono">₦3,500</span>
+                  <span class="order-date">July 20, 2026</span>
+                </div>
+              </div>
 
-    <div class="row g-3 mt-4">
-      <div class="col-6 col-md-3">
-        <div class="profile-stat">
-          <span class="stat-num">14</span>
-          <span class="stat-label">Orders placed</span>
+              <div class="order-row">
+                <div class="order-info">
+                  <h3>Suya Spot Central</h3>
+                  <p>Suya Wrap · 1 item</p>
+                </div>
+                <div class="order-meta">
+                  <span class="mono">₦2,000</span>
+                  <span class="order-date">July 18, 2026</span>
+                </div>
+              </div>
+
+              <div class="order-row">
+                <div class="order-info">
+                  <h3>Chapman & Co.</h3>
+                  <p>Chapman · 2 items</p>
+                </div>
+                <div class="order-meta">
+                  <span class="mono">₦2,400</span>
+                  <span class="order-date">July 15, 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <a class="navbar-brand brand-mark" href="index.html">Choply</a>
+        <div class="ms-auto">
+          <a href="index.html" class="nav-link d-inline">Back to home</a>
         </div>
       </div>
-      <div class="col-6 col-md-3">
-        <div class="profile-stat">
-          <span class="stat-num">₦250,300.90</span>
-          <span class="stat-label">Total spent</span>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="profile-stat">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Saved spots</span>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="profile-stat">
-          <span class="stat-num">4.9★</span>
-          <span class="stat-label">Your rating</span>
-        </div>
-      </div>
-    </div>
+    </nav>
 
-    <h2 class="section-title mt-5">Recent orders</h2>
-    <div class="order-history mt-3">
+    <section class="profile-section py-5">
+      <div class="container"></div>
+    </section>
 
-      <div class="order-row">
-        <div class="order-info">
-          <h3>Mama Ngozi's Kitchen</h3>
-          <p>Jollof Rice + Chicken · 2 items</p>
-        </div>
-        <div class="order-meta">
-          <span class="mono">₦3,500</span>
-          <span class="order-date">July 20, 2026</span>
-        </div>
-      </div>
+    <script>
+      const token = localStorage.getItem("choplyToken");
+      const orderHistory = document.querySelector(".order-history");
+      const orderStats = document.querySelectorAll(".profile-stat .stat-num");
 
-      <div class="order-row">
-        <div class="order-info">
-          <h3>Suya Spot Central</h3>
-          <p>Suya Wrap · 1 item</p>
-        </div>
-        <div class="order-meta">
-          <span class="mono">₦2,000</span>
-          <span class="order-date">July 18, 2026</span>
-        </div>
-      </div>
+      async function loadProfileOrders() {
+        if (!token) {
+          orderHistory.innerHTML =
+            '<p class="cart-empty">Please <a href="login.html">log in</a> to view your orders.</p>';
+          return;
+        }
+        try {
+          const response = await fetch("http://localhost:3000/api/orders", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(data.error || "Unable to load orders.");
+          }
+          const orders = data;
+          orderHistory.innerHTML = orders.length
+            ? orders
+                .map(
+                  (order) =>
+                    `<div class="order-row"><div class="order-info"><h3>${
+                      order.restaurantName
+                    }</h3><p>${order.items
+                      .map((item) => `${item.name} · ${item.quantity}`)
+                      .join(", ")}</p><p class="order-status">${
+                      order.status || "Pending"
+                    } · ${
+                      order.paymentMethod || "Payment pending"
+                    }</p></div><div class="order-meta"><span class="mono">₦${Number(
+                      order.total,
+                    ).toLocaleString()}</span><span class="order-date">${new Date(
+                      order.date,
+                    ).toLocaleDateString()}</span></div></div>`,
+                )
+                .join("")
+            : '<p class="cart-empty">You have not placed an order yet. <a href="menu.html">Browse the menu</a></p>';
+          orderStats[0].textContent = orders.length;
+          orderStats[1].textContent = `₦${orders
+            .reduce((total, order) => total + Number(order.total || 0), 0)
+            .toLocaleString()}`;
+        } catch (error) {
+          if (/expired|invalid token|session expired/i.test(error.message)) {
+            localStorage.removeItem("choplyToken");
+            localStorage.removeItem("choplyUser");
+            window.location.href = "login.html";
+            return;
+          }
+          orderHistory.innerHTML = `<p class="cart-empty">${error.message}</p>`;
+        }
+      }
 
-      <div class="order-row">
-        <div class="order-info">
-          <h3>Chapman & Co.</h3>
-          <p>Chapman · 2 items</p>
-        </div>
-        <div class="order-meta">
-          <span class="mono">₦2,400</span>
-          <span class="order-date">July 15, 2026</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-    <a class="navbar-brand brand-mark" href="index.html">Choply</a>
-    <div class="ms-auto">
-      <a href="index.html" class="nav-link d-inline">Back to home</a>
-    </div>
-  </div>
-</nav>
-
-<section class="profile-section py-5">
-  <div class="container">
-
-  </div>
-</section>
-
-</body>
+      document
+        .querySelector(".profile-logout")
+        ?.addEventListener("click", () => {
+          localStorage.removeItem("choplyToken");
+          localStorage.removeItem("choplyUser");
+        });
+      loadProfileOrders();
+    </script>
+  </body>
 </html>

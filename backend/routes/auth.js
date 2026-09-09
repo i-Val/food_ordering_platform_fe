@@ -1,7 +1,7 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import { readDb, writeDb } from '../data/db.js';
-import { generateToken } from '../middleware/auth.js';
+import express from "express";
+import bcrypt from "bcryptjs";
+import { readDb, writeDb } from "../data/db.js";
+import { generateToken } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -53,29 +53,35 @@ const router = express.Router();
  *       400:
  *         description: Bad request (user already exists, invalid data)
  */
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
 
     if (!fullName || !email || !password) {
-      return res.status(400).json({ error: 'All fields (fullName, email, password) are required.' });
+      return res.status(400).json({
+        error: "All fields (fullName, email, password) are required.",
+      });
     }
 
     const db = readDb();
-    const existingUser = db.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    const existingUser = db.users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase(),
+    );
     if (existingUser) {
-      return res.status(400).json({ error: 'User with this email already exists.' });
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists." });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = {
-      id: db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1,
+      id: db.users.length > 0 ? Math.max(...db.users.map((u) => u.id)) + 1 : 1,
       fullName,
       email: email.toLowerCase(),
       password: hashedPassword,
       rating: 5.0,
-      savedSpotsCount: 0
+      savedSpotsCount: 0,
     };
 
     db.users.push(newUser);
@@ -88,12 +94,12 @@ router.post('/signup', async (req, res) => {
       user: {
         id: newUser.id,
         fullName: newUser.fullName,
-        email: newUser.email
-      }
+        email: newUser.email,
+      },
     });
   } catch (error) {
-    console.error('Signup error:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Signup error:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 
@@ -141,24 +147,34 @@ router.post('/signup', async (req, res) => {
  *       400:
  *         description: Invalid email or password
  */
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required.' });
+      return res
+        .status(400)
+        .json({ error: "Email and password are required." });
     }
 
     const db = readDb();
-    const user = db.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    const user = db.users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase(),
+    );
 
     if (!user) {
-      return res.status(400).json({ error: 'Invalid email or password.' });
+      return res.status(400).json({ error: "Invalid email or password." });
+    }
+
+    if (user.blocked) {
+      return res.status(403).json({
+        error: "This account has been blocked. Contact Choply support.",
+      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: 'Invalid email or password.' });
+      return res.status(400).json({ error: "Invalid email or password." });
     }
 
     const token = generateToken(user);
@@ -168,13 +184,34 @@ router.post('/login', async (req, res) => {
       user: {
         id: user.id,
         fullName: user.fullName,
-        email: user.email
-      }
+        email: user.email,
+      },
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Login error:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
+});
+
+router.post("/admin-login", async (req, res) => {
+  const { email, password } = req.body;
+  const adminEmail = process.env.ADMIN_EMAIL || "test@test";
+  const adminPassword = process.env.ADMIN_PASSWORD || "test123";
+
+  if (email !== adminEmail || password !== adminPassword) {
+    return res.status(401).json({ error: "Invalid admin credentials." });
+  }
+
+  const token = generateToken({
+    id: "admin",
+    email: adminEmail,
+    fullName: "Choply Admin",
+    role: "admin",
+  });
+  res.json({
+    token,
+    user: { email: adminEmail, fullName: "Choply Admin", role: "admin" },
+  });
 });
 
 export default router;

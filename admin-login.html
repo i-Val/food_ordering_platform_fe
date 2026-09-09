@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Sign In — Choply</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="auth-page admin-auth-page">
+    <main class="auth-card">
+      <a href="index.html" class="brand-mark auth-brand">Choply</a>
+      <p class="eyebrow auth-eyebrow">STAFF ACCESS</p>
+      <h1 class="auth-heading">Admin sign in.</h1>
+      <form class="auth-form" id="adminLoginForm">
+        <label class="auth-label" for="adminEmail">Admin email</label>
+        <input
+          class="auth-input"
+          id="adminEmail"
+          type="email"
+          value="admin@choply.local"
+          required
+        />
+        <input class="auth-input" id="adminPassword" type="password" required />
+        <label class="auth-label" for="adminPassword">Password</label>
+        <button class="btn btn-stamp btn-lg auth-submit" type="submit">
+          Enter dashboard
+        </button>
+      </form>
+      <p class="auth-error" id="adminLoginError" role="alert"></p>
+      <p class="auth-switch"><a href="index.html">Return to Choply</a></p>
+    </main>
+    <script>
+      document
+        .getElementById("adminLoginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const error = document.getElementById("adminLoginError");
+          error.textContent = "";
+          try {
+            const response = await fetch(
+              "http://localhost:3000/api/auth/admin-login",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  email: document.getElementById("adminEmail").value,
+                  password: document.getElementById("adminPassword").value,
+                }),
+              },
+            );
+            const data = await response.json();
+            if (!response.ok)
+              throw new Error(data.error || "Invalid admin credentials.");
+            localStorage.setItem("choplyAdminToken", data.token);
+            localStorage.setItem("choplyAdminUser", JSON.stringify(data.user));
+            window.location.href = "admin.html";
+          } catch (requestError) {
+            error.textContent = requestError.message;
+          }
+        });
+    </script>
+  </body>
+</html>
