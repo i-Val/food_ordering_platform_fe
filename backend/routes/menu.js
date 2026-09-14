@@ -70,6 +70,15 @@ router.get('/menu', (req, res) => {
   }
 });
 
+router.get('/payment-settings', (req, res) => {
+  const db = readDb();
+  res.json({
+    bankName: db.paymentSettings?.bankName || '',
+    accountName: db.paymentSettings?.accountName || '',
+    accountNumber: db.paymentSettings?.accountNumber || '',
+  });
+});
+
 /**
  * @openapi
  * /api/restaurants:

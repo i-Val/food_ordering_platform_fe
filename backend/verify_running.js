@@ -134,15 +134,16 @@ async function runTests() {
       fullName: 'Test User',
       address: '123 Test St, Test City',
       phone: '08099998888',
+      paymentMethod: 'Cash on delivery',
       items: [
-        { name: 'Jollof Rice + Chicken', price: 3500, quantity: 2 },
-        { name: 'Chapman', price: 1200, quantity: 1 }
+        { name: 'Jollof Rice + Chicken', price: 3500, quantity: 2, restaurant: 'Mama Ngozi\'s Kitchen' },
+        { name: 'Fried Rice + Plantain', price: 3200, quantity: 1, restaurant: 'Mama Ngozi\'s Kitchen' }
       ]
     };
     const orderRes = await request('POST', '/api/orders', orderPayload, token);
     console.log('Status:', orderRes.status);
     console.log('New Order Total:', orderRes.body?.total);
-    if (orderRes.status !== 201 || orderRes.body?.total !== 8200) {
+    if (orderRes.status !== 201 || orderRes.body?.total !== 10200) {
       console.error('FAIL: Place order failed');
       passed = false;
     } else {
@@ -152,8 +153,8 @@ async function runTests() {
     console.log('\n--- 8. Testing profile update after order ---');
     const updatedProfileRes = await request('GET', '/api/profile', null, token);
     console.log('New Orders Count:', updatedProfileRes.body.ordersCount, '(expected 1)');
-    console.log('New Total Spent:', updatedProfileRes.body.totalSpent, '(expected 8200)');
-    if (updatedProfileRes.body.ordersCount !== 1 || updatedProfileRes.body.totalSpent !== 8200) {
+    console.log('New Total Spent:', updatedProfileRes.body.totalSpent, '(expected 10200)');
+    if (updatedProfileRes.body.ordersCount !== 1 || updatedProfileRes.body.totalSpent !== 10200) {
       console.error('FAIL: Profile stats did not update correctly after order');
       passed = false;
     } else {

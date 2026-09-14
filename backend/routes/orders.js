@@ -110,23 +110,44 @@ router.post("/orders", authenticateToken, (req, res) => {
         });
     }
 
+    const db = readDb();
+    const orderItems = [];
     let total = 0;
     for (const item of items) {
-      if (!item.name || !item.price || !item.quantity) {
+      const quantity = Number(item.quantity || 1);
+      const menuItem = (db.menu || []).find(
+        (availableItem) =>
+          availableItem.name === item.name &&
+          availableItem.restaurantName === item.restaurant,
+      );
+      if (
+        !menuItem ||
+        menuItem.restaurantName !== restaurantName ||
+        !Number.isInteger(quantity) ||
+        quantity < 1 ||
+        quantity > 20
+      ) {
         return res
           .status(400)
-          .json({ error: "Each item must have a name, price, and quantity." });
+          .json({ error: "Each item must be a valid menu item with a quantity from 1 to 20." });
       }
-      total += item.price * item.quantity;
+      const orderItem = {
+        name: menuItem.name,
+        price: Number(menuItem.price),
+        quantity,
+        restaurant: menuItem.restaurantName,
+        customization: item.customization || "Standard",
+      };
+      orderItems.push(orderItem);
+      total += orderItem.price * quantity;
     }
 
-    const db = readDb();
     const newOrder = {
       id:
         db.orders.length > 0 ? Math.max(...db.orders.map((o) => o.id)) + 1 : 1,
       userId,
       restaurantName,
-      items,
+      items: orderItems,
       total,
       date: new Date().toISOString(),
       deliveryAddress: address,

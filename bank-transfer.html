@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Transfer — Choply</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="transfer-page">
+      <section class="transfer-card">
+        <a href="index.html" class="brand-mark transfer-brand">Choply</a>
+        <p class="eyebrow auth-eyebrow">BANK TRANSFER</p>
+        <h1 class="auth-heading">Complete your payment.</h1>
+        <p class="transfer-page-copy">
+          Transfer the order total to the account below. Your order will be
+          submitted after you confirm payment.
+        </p>
+
+        <div class="transfer-page-details">
+          <div>
+            <span>Amount to transfer</span>
+            <strong id="transferAmount">Loading...</strong>
+          </div>
+          <div>
+            <span>Bank</span>
+            <strong id="transferBank">Loading...</strong>
+          </div>
+          <div>
+            <span>Account name</span>
+            <strong id="transferAccountName">Loading...</strong>
+          </div>
+          <div>
+            <span>Account number</span>
+            <strong class="transfer-page-account" id="transferAccountNumber">Loading...</strong>
+          </div>
+        </div>
+
+        <p class="transfer-page-note" id="transferMessage" role="status"></p>
+        <button class="btn btn-stamp btn-lg transfer-paid-button" id="paidButton" type="button">
+          I've paid
+        </button>
+        <a class="transfer-back-link" href="checkout.html">Back to checkout</a>
+      </section>
+    </main>
+
+    <script>
+      const apiBase = "http://localhost:3000/api";
+      const pendingTransfer = JSON.parse(
+        localStorage.getItem("choplyPendingTransfer") || "null",
+      );
+      const token = localStorage.getItem("choplyToken");
+      const paidButton = document.getElementById("paidButton");
+      const transferMessage = document.getElementById("transferMessage");
+
+      function showMessage(message, isError = false) {
+        transferMessage.textContent = message;
+        transferMessage.classList.toggle("transfer-error", isError);
+      }
+
+      function calculateTotal(items) {
+        return items.reduce(
+          (total, item) => total + Number(item.price) * Number(item.quantity || 1),
+          0,
+        );
+      }
+
+      const transferOrders = pendingTransfer?.orders ||
+        (pendingTransfer ? [pendingTransfer] : []);
+
+      async function loadTransferPage() {
+        if (!pendingTransfer || !token) {
+          window.location.href = token ? "checkout.html" : "login.html";
+          return;
+        }
+
+        const total = transferOrders.reduce(
+          (sum, order) => sum + calculateTotal(order.items),
+          0,
+        );
+        document.getElementById("transferAmount").textContent = `₦${total.toLocaleString()}`;
+        try {
+          const response = await fetch(`${apiBase}/payment-settings`);
+          const settings = await response.json();
+          if (!response.ok || !settings.bankName || !settings.accountNumber) {
+            throw new Error("Bank transfer details have not been configured yet.");
+          }
+          document.getElementById("transferBank").textContent = settings.bankName;
+          document.getElementById("transferAccountName").textContent = settings.accountName;
+          document.getElementById("transferAccountNumber").textContent = settings.accountNumber;
+        } catch (error) {
+          paidButton.disabled = true;
+          showMessage(error.message, true);
+        }
+      }
+
+      paidButton.addEventListener("click", async () => {
+        paidButton.disabled = true;
+        paidButton.textContent = "Submitting order...";
+        showMessage("");
+        try {
+          const responses = await Promise.all(
+            transferOrders.map(async (order) => {
+              const response = await fetch(`${apiBase}/orders`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(order),
+              });
+              const data = await response.json().catch(() => ({}));
+              if (!response.ok) throw new Error(data.error || "Unable to place order.");
+              return data;
+            }),
+          );
+          localStorage.removeItem("choplyPendingTransfer");
+          localStorage.removeItem("choplyCart");
+          localStorage.setItem("choplyLastOrder", JSON.stringify(responses));
+          window.location.href = "confirmation.html";
+        } catch (error) {
+          if (/expired|invalid token|session expired/i.test(error.message)) {
+            localStorage.removeItem("choplyToken");
+            localStorage.removeItem("choplyUser");
+            window.location.href = "login.html";
+            return;
+          }
+          paidButton.disabled = false;
+          paidButton.textContent = "I've paid";
+          showMessage(error.message, true);
+        }
+      });
+
+      loadTransferPage();
+    </script>
+  </body>
+</html>

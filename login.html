@@ -77,7 +77,7 @@
               throw new Error(data.error || "Unable to log in.");
             localStorage.setItem("choplyToken", data.token);
             localStorage.setItem("choplyUser", JSON.stringify(data.user));
-            window.location.href = "menu.html";
+            window.location.href = "index.html";
           } catch (requestError) {
             error.textContent = requestError.message;
           }

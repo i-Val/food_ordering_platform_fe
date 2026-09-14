@@ -11,6 +11,7 @@ router.get("/admin/dashboard", (req, res) => {
     menu: db.menu || [],
     orders: db.orders || [],
     restaurants: db.restaurants || [],
+    paymentSettings: db.paymentSettings || {},
     users: (db.users || []).map(({ password, ...user }) => ({
       ...user,
       orderCount: (db.orders || []).filter((order) => order.userId === user.id)
@@ -33,6 +34,24 @@ router.patch("/admin/orders/status", (req, res) => {
   });
   writeDb(db);
   res.json({ updated: db.orders.length });
+});
+
+router.patch("/admin/payment-settings", (req, res) => {
+  const { bankName, accountName, accountNumber } = req.body;
+  if (!bankName?.trim() || !accountName?.trim() || !/^\d{10}$/.test(accountNumber?.trim())) {
+    return res.status(400).json({
+      error: "Bank name, account name, and a 10-digit account number are required.",
+    });
+  }
+
+  const db = readDb();
+  db.paymentSettings = {
+    bankName: bankName.trim(),
+    accountName: accountName.trim(),
+    accountNumber: accountNumber.trim(),
+  };
+  writeDb(db);
+  res.json(db.paymentSettings);
 });
 
 router.post("/admin/menu", (req, res) => {
@@ -70,6 +89,36 @@ router.post("/admin/menu", (req, res) => {
   db.menu.push(item);
   writeDb(db);
   res.status(201).json(item);
+});
+
+router.patch("/admin/menu/:id", (req, res) => {
+  const { name, restaurantName, price, image } = req.body;
+  if (
+    !name?.trim() ||
+    !restaurantName?.trim() ||
+    !Number.isFinite(Number(price)) ||
+    Number(price) <= 0
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Name, restaurant, and a positive price are required." });
+  }
+
+  const db = readDb();
+  const item = db.menu.find((menuItem) => String(menuItem.id) === req.params.id);
+  if (!item) return res.status(404).json({ error: "Menu item not found." });
+
+  const restaurant = db.restaurants.find(
+    (restaurantItem) =>
+      restaurantItem.name.toLowerCase() === restaurantName.trim().toLowerCase(),
+  );
+  item.name = name.trim();
+  item.restaurantName = restaurantName.trim();
+  item.restaurantId = restaurant?.id || null;
+  item.price = Number(price);
+  if (image) item.image = image;
+  writeDb(db);
+  res.json(item);
 });
 
 router.delete("/admin/menu/:id", (req, res) => {

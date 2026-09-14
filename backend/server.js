@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 // Body parser
-app.use(express.json());
+app.use(express.json({ limit: "8mb" }));
 
 // Serve Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

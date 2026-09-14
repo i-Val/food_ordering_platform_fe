@@ -130,6 +130,11 @@
       }
 
       const checkoutForm = document.getElementById("checkoutForm");
+      const paymentMethod = document.getElementById("paymentMethod");
+      const storedUser = JSON.parse(localStorage.getItem("choplyUser") || "null");
+      if (storedUser?.fullName) {
+        document.getElementById("fullName").value = storedUser.fullName;
+      }
 
       checkoutForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -139,7 +144,6 @@
           alert("Your cart is empty — add something from the menu first.");
           return;
         }
-
         const token = localStorage.getItem("choplyToken");
         if (!token) {
           alert("Please log in before placing your order.");
@@ -147,27 +151,51 @@
           return;
         }
 
+        const groupedItems = cart.reduce((groups, item) => {
+          const restaurantItems = groups[item.restaurant] || [];
+          restaurantItems.push(item);
+          groups[item.restaurant] = restaurantItems;
+          return groups;
+        }, {});
+        const orderDetails = Object.entries(groupedItems).map(
+          ([restaurantName, items]) => ({
+            restaurantName,
+            items,
+            fullName: document.getElementById("fullName").value,
+            address: document.getElementById("address").value,
+            phone: document.getElementById("phone").value,
+            paymentMethod: paymentMethod.value,
+          }),
+        );
+
+        if (paymentMethod.value === "Bank transfer") {
+          localStorage.setItem(
+            "choplyPendingTransfer",
+            JSON.stringify({ orders: orderDetails }),
+          );
+          window.location.href = "bank-transfer.html";
+          return;
+        }
+
         try {
-          const response = await fetch("http://localhost:3000/api/orders", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              restaurantName: cart[0].restaurant,
-              items: cart,
-              fullName: document.getElementById("fullName").value,
-              address: document.getElementById("address").value,
-              phone: document.getElementById("phone").value,
-              paymentMethod: document.getElementById("paymentMethod").value,
-            }),
-          });
-          const data = await response.json().catch(() => ({}));
-          if (!response.ok)
-            throw new Error(data.error || "Unable to place order.");
+          const responses = await Promise.all(
+            orderDetails.map((order) =>
+              fetch("http://localhost:3000/api/orders", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(order),
+              }).then(async (response) => {
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.error || "Unable to place order.");
+                return data;
+              }),
+            ),
+          );
           localStorage.removeItem("choplyCart");
-          localStorage.setItem("choplyLastOrder", JSON.stringify(data));
+          localStorage.setItem("choplyLastOrder", JSON.stringify(responses));
           window.location.href = "confirmation.html";
         } catch (error) {
           if (/expired|invalid token|session expired/i.test(error.message)) {

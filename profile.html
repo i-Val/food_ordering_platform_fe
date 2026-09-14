@@ -27,8 +27,8 @@
                 class="profile-avatar"
               />
               <div>
-                <h1 class="profile-name">Ofure Itulah</h1>
-                <p class="profile-email">ofure@example.com</p>
+                <h1 class="profile-name" id="profileName">Profile</h1>
+                <p class="profile-email" id="profileEmail">Loading profile...</p>
               </div>
               <a href="login.html" class="btn btn-outline-ink profile-logout"
                 >Log out</a
@@ -50,13 +50,13 @@
               </div>
               <div class="col-6 col-md-3">
                 <div class="profile-stat">
-                  <span class="stat-num">3</span>
+                  <span class="stat-num" id="savedSpotsStat">0</span>
                   <span class="stat-label">Saved spots</span>
                 </div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="profile-stat">
-                  <span class="stat-num">4.9★</span>
+                  <span class="stat-num" id="ratingStat">-</span>
                   <span class="stat-label">Your rating</span>
                 </div>
               </div>
@@ -115,6 +115,19 @@
       const orderHistory = document.querySelector(".order-history");
       const orderStats = document.querySelectorAll(".profile-stat .stat-num");
 
+      async function loadProfile() {
+        if (!token) return;
+        const response = await fetch("http://localhost:3000/api/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Unable to load profile.");
+        document.getElementById("profileName").textContent = data.fullName;
+        document.getElementById("profileEmail").textContent = data.email;
+        document.getElementById("savedSpotsStat").textContent = data.savedSpotsCount;
+        document.getElementById("ratingStat").textContent = `${data.rating}★`;
+      }
+
       async function loadProfileOrders() {
         if (!token) {
           orderHistory.innerHTML =
@@ -171,7 +184,13 @@
           localStorage.removeItem("choplyToken");
           localStorage.removeItem("choplyUser");
         });
-      loadProfileOrders();
+      Promise.all([loadProfile(), loadProfileOrders()]).catch((error) => {
+        if (/expired|invalid token|session expired/i.test(error.message)) {
+          localStorage.removeItem("choplyToken");
+          localStorage.removeItem("choplyUser");
+          window.location.href = "login.html";
+        }
+      });
     </script>
   </body>
 </html>

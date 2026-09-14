@@ -75,7 +75,7 @@
           if (!response.ok) throw new Error(data.error || 'Unable to create account.');
           localStorage.setItem('choplyToken', data.token);
           localStorage.setItem('choplyUser', JSON.stringify(data.user));
-          window.location.href = 'menu.html';
+          window.location.href = 'index.html';
         } catch (requestError) { error.textContent = requestError.message; }
       });
     </script>

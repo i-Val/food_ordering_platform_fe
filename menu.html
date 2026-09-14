@@ -848,101 +848,64 @@
           const response = await fetch("http://localhost:3000/api/menu");
           if (!response.ok) return;
           const liveMenu = await response.json();
-          const normalizeName = (name) =>
-            name.toLowerCase().replace(/[^a-z0-9]/g, "");
-          const existingNames = new Set(
-            [...document.querySelectorAll(".food-card-wrapper")].map((card) =>
-              normalizeName(card.dataset.name),
-            ),
+          const escapeHtml = (value) =>
+            String(value ?? "").replace(
+              /[&<>'"]/g,
+              (character) =>
+                ({
+                  "&": "&amp;",
+                  "<": "&lt;",
+                  ">": "&gt;",
+                  "'": "&#39;",
+                  '"': "&quot;",
+                })[character],
+            );
+          const menuSection = document.querySelector(".menu-section");
+          document.querySelectorAll(".restaurant-section").forEach((section) =>
+            section.remove(),
           );
-          const liveNames = new Set(
-            liveMenu.map((item) => normalizeName(item.name)),
+          const liveSection = document.createElement("div");
+          liveSection.className = "restaurant-section live-menu-section";
+          liveSection.innerHTML =
+            '<div class="restaurant-header"><div><span class="restaurant-tag">CHOPLY MENU</span><h2>Fresh from the kitchen</h2><p>Browse every dish currently available.</p></div></div><div class="row g-4" id="liveMenuGrid"></div>';
+          menuSection.querySelector(".container").insertBefore(
+            liveSection,
+            document.getElementById("noResults"),
           );
-          document.querySelectorAll(".food-card-wrapper").forEach((card) => {
-            card.style.display = liveNames.has(normalizeName(card.dataset.name))
-              ? ""
-              : "none";
-          });
-
-          liveMenu
-            .filter((item) => !existingNames.has(normalizeName(item.name)))
-            .forEach((item) => {
-              let section = [
-                ...document.querySelectorAll(".restaurant-section"),
-              ].find(
-                (candidate) =>
-                  candidate.querySelector("h2")?.textContent.trim() ===
-                  item.restaurantName,
+          const liveGrid = document.getElementById("liveMenuGrid");
+          liveMenu.forEach((item) => {
+            const name = escapeHtml(item.name);
+            const restaurant = escapeHtml(item.restaurantName);
+            const image = escapeHtml(item.image || "images/hero-food.jpg");
+            const category = item.restaurantName.toLowerCase().includes("chapman")
+              ? "drinks"
+              : item.restaurantName.toLowerCase().includes("suya")
+              ? "suya"
+              : "rice";
+            const wrapper = document.createElement("div");
+            wrapper.className = "col-md-6 col-lg-4 food-card-wrapper";
+            wrapper.dataset.category = category;
+            wrapper.dataset.name = item.name.toLowerCase();
+            wrapper.innerHTML = `<div class="food-card"><div class="food-image-wrapper"><img src="${image}" alt="${name}" class="food-image" /></div><div class="food-content"><h3>${name}</h3><p>Freshly prepared by ${restaurant}.</p><div class="food-bottom"><span class="food-price">₦${Number(item.price).toLocaleString()}</span><div class="food-options"><label>Qty</label><input class="food-quantity" type="number" min="1" max="20" value="1" /></div><button class="add-btn add-to-cart-btn" data-name="${name}" data-price="${Number(item.price)}" data-restaurant="${restaurant}">+ Add</button></div></div></div>`;
+            liveGrid.appendChild(wrapper);
+            wrapper.querySelector(".add-to-cart-btn").addEventListener("click", () => {
+              const quantity = Math.min(20, Math.max(1, Number(wrapper.querySelector(".food-quantity").value) || 1));
+              const cart = getCart();
+              const existingItem = cart.find(
+                (cartItem) =>
+                  cartItem.name === item.name &&
+                  cartItem.restaurant === item.restaurantName,
               );
-              let row = section?.querySelector(".row");
-              if (!row) {
-                section = document.createElement("div");
-                section.className = "restaurant-section mt-5";
-                section.innerHTML = `<div class="restaurant-header"><span class="restaurant-tag">NEW RESTAURANT</span><h2>${item.restaurantName}</h2><p>Freshly prepared menu items.</p></div><div class="row g-4"></div>`;
-                document
-                  .querySelector(".menu-section .container")
-                  .appendChild(section);
-                row = section.querySelector(".row");
+              if (existingItem) {
+                existingItem.quantity = Math.min(20, (existingItem.quantity || 1) + quantity);
+              } else {
+                cart.push({ name: item.name, price: Number(item.price), restaurant: item.restaurantName, customization: "Standard", quantity });
               }
-              const wrapper = document.createElement("div");
-              wrapper.className = "col-md-6 col-lg-4 food-card-wrapper";
-              wrapper.dataset.category = item.restaurantName
-                .toLowerCase()
-                .includes("chapman")
-                ? "drinks"
-                : item.restaurantName.toLowerCase().includes("suya")
-                ? "suya"
-                : "rice";
-              wrapper.dataset.name = item.name.toLowerCase();
-              wrapper.innerHTML = `<div class="food-card"><div class="food-image-wrapper"><img src="${
-                item.image || "images/hero-food.jpg"
-              }" alt="${
-                item.name
-              }" class="food-image" /></div><div class="food-content"><h3>${
-                item.name
-              }</h3><p>Freshly prepared by ${
-                item.restaurantName
-              }.</p><div class="food-bottom"><span class="food-price">₦${Number(
-                item.price,
-              ).toLocaleString()}</span><div class="food-options"><label>Qty</label><input class="food-quantity" type="number" min="1" max="20" value="1" /></div><button class="add-btn add-to-cart-btn" data-name="${
-                item.name
-              }" data-price="${item.price}" data-restaurant="${
-                item.restaurantName
-              }">+ Add</button></div></div></div>`;
-              row.appendChild(wrapper);
-              const button = wrapper.querySelector(".add-to-cart-btn");
-              button.addEventListener("click", () => {
-                const quantity = Math.min(
-                  20,
-                  Math.max(
-                    1,
-                    Number(wrapper.querySelector(".food-quantity").value) || 1,
-                  ),
-                );
-                const cart = getCart();
-                const existingItem = cart.find(
-                  (cartItem) =>
-                    cartItem.name === item.name &&
-                    cartItem.restaurant === item.restaurantName,
-                );
-                if (existingItem)
-                  existingItem.quantity = Math.min(
-                    20,
-                    (existingItem.quantity || 1) + quantity,
-                  );
-                else
-                  cart.push({
-                    name: item.name,
-                    price: Number(item.price),
-                    restaurant: item.restaurantName,
-                    customization: "Standard",
-                    quantity,
-                  });
-                saveCart(cart);
-                updateCartCount();
-                flashCartState("cart-added");
-              });
+              saveCart(cart);
+              updateCartCount();
+              flashCartState("cart-added");
             });
+          });
           foodCards = document.querySelectorAll(".food-card-wrapper");
         } catch (error) {
           console.info("Live menu unavailable until the backend is running.");
